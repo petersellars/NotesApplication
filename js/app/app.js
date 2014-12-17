@@ -27,6 +27,34 @@ Notes.NotesNoteRoute = Ember.Route.extend({
     }
 })
 
+// Define Notes Controller
+Notes.NotesController = Ember.ArrayController.extend({
+    newNoteName: null, // Binds newNoteName property to text field
+    actions: {
+        createNewNote: function() { // Define createNewNote action
+            var content = this.get('content');
+            var newNoteName = this.get('newNoteName');
+            var unique = newNoteName != null && newNoteName.length > 1;
+            content.forEach(function(note) {
+                if (newNoteName === note.get('name')) {
+                    unique = false;
+                    return;
+                }
+            });
+            if (unique) {
+                var newNote = this.store.createRecord('note');
+                newNote,set('id', newNoteName);
+                newNote.set('name', newNoteName);
+                newNote.save();
+
+                this.set('newNoteName', null);
+            } else {
+                alert('Note must have a unique name of at least 2 characters!');
+            }
+        }
+    }
+})
+
 // Create Notes.Store class extending Ember Data's DS.Store
 Notes.ApplicationStore = DS.Store.extend({
     adapter: DS.LSAdapter // Use Local Storage Adapter
