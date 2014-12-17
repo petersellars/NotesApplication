@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress XmlDuplicatedId, XmlDuplicatedId -->
 <html>
 <head lang="en">
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
@@ -34,8 +35,13 @@
             type="text/javascript" charset="utf-8">
     </script>
 
-    <script type="text/x-handlebars" id="application">
-        Hello Notes Application!
+    <script type="text/x-handlebars" id="notes">
+        <div id="notes" class="azureBlueBackground azureBlueBorderThin">
+            {{input}}
+            <button class="btn btn-default btn-xs">
+                New Note
+            </button>
+        </div>
     </script>
 
 </head>
