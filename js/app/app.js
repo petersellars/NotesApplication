@@ -43,7 +43,7 @@ Notes.NotesController = Ember.ArrayController.extend({
             });
             if (unique) {
                 var newNote = this.store.createRecord('note');
-                newNote,set('id', newNoteName);
+                newNote.set('id', newNoteName);
                 newNote.set('name', newNoteName);
                 newNote.save();
 
