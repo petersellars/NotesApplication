@@ -44,11 +44,9 @@
             </button>
             <div class="list-group" style="margin-top: 10px;">
                 {{#each controller}}
-                <div class="list-group-item">
-                    {{#link-to "notes.note" this}}
+                    {{#link-to "notes.note" this class="list-group-item"}}
                         {{name}}
                     {{/link-to}}
-                </div>
                 {{/each}}
             </div>
         </div>
@@ -60,6 +58,8 @@
         <div id="selectedNote">
             <h1>name: {{name}}</h1>
             {{textarea valueBinding="value"}}
+            <button class="btn btn-primary form-control mediumTopPadding"
+                    {{action "updateNote"}}>Update</button><br/>
         </div>
     </script>
 

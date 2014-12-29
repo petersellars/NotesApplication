@@ -55,6 +55,19 @@ Notes.NotesController = Ember.ArrayController.extend({
     }
 })
 
+// Define NotesNoteController
+Notes.NotesNoteController = Ember.ObjectController.extend({
+   actions: {
+       updateNote: function() {
+           var content = this.get('content');
+           console.log(content);
+           if (content) {
+               content.save();
+           }
+       }
+   }
+});
+
 // Create Notes.Store class extending Ember Data's DS.Store
 Notes.ApplicationStore = DS.Store.extend({
     adapter: DS.LSAdapter // Use Local Storage Adapter
