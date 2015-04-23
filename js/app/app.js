@@ -29,6 +29,7 @@ Notes.NotesNoteRoute = Ember.Route.extend({
 
 // Define Notes Controller
 Notes.NotesController = Ember.ArrayController.extend({
+    needs: ['notesNote'],
     newNoteName: null, // Binds newNoteName property to text field
     actions: {
         createNewNote: function() { // Define createNewNote action
@@ -51,6 +52,10 @@ Notes.NotesController = Ember.ArrayController.extend({
             } else {
                 alert('Note must have a unique name of at least 2 characters!');
             }
+        },
+        doDeleteNote: function(note) {
+            this.set('noteForDeletion', note);
+            $("#confirmDeleteNoteDialog").modal({"show": true});
         }
     }
 })
