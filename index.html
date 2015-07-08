@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress XmlDuplicatedId, XmlDuplicatedId -->
 <html>
 <head lang="en">
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
@@ -14,7 +15,7 @@
     <script src="js/scripts/jquery-1.11.1.js"
             type="text/javascript" charset="utf-8">
     </script>
-    <script src="js/scripts/bootstrap-modal.js"
+    <script src="js/scripts/bootstrap.js"
             type="text/javascript" charset="utf-8">
     </script>
     <script src="js/scripts/handlebars-v1.3.0.js"
@@ -34,8 +35,63 @@
             type="text/javascript" charset="utf-8">
     </script>
 
-    <script type="text/x-handlebars" id="application">
-        Hello Notes Application!
+    <script type="text/x-handlebars" id="notes">
+        <div id="notes" class="azureBlueBackground azureBlueBorderThin">
+            {{input valueBinding="newNoteName"}}
+            <button class="btn btn-default btn-xs"
+                    {{action "createNewNote"}}>
+                New Note
+            </button>
+            <div class="list-group" style="margin-top: 10px;">
+                {{#each controller}}
+                    {{#link-to "notes.note" this class="list-group-item"}}
+                        {{name}}
+
+                        <button class="btn btn-danger btn-xs pull-right"
+                                {{action "doDeleteNote" this}}>Delete</button>
+                    {{/link-to}}
+                {{/each}}
+            </div>
+        </div>
+
+        {{outlet}}
+
+        {{partial "confirmDialog"}}
+    </script>
+
+    <script type="text/x-handlebars" id="notes/note">
+        <div id="selectedNote">
+            <h1>name: {{name}}</h1>
+            {{textarea valueBinding="value"}}
+            <button class="btn btn-primary form-control mediumTopPadding"
+                    {{action "updateNote"}}>Update</button><br/>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="_confirmDialog">
+        <div id="confirmDeleteNoteDialog" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header centerAlign">
+                        <h1 class="centerAlign">Delete selected note?</h1>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the selected Note?
+                        This action cannot be undone!
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default"
+                                {{action "doCancelDelete"}}>
+                                Cancel
+                        </button>
+                        <button class="btn btn-primary"
+                                {{action "doConfirmDelete"}}>
+                                Delete Note
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </script>
 
 </head>
