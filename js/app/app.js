@@ -56,9 +56,25 @@ Notes.NotesController = Ember.ArrayController.extend({
         doDeleteNote: function(note) {
             this.set('noteForDeletion', note);
             $("#confirmDeleteNoteDialog").modal({"show": true});
+        },
+        doCancelDelete: function() {
+            this.set('noteForDeletion', null);
+            $("#confirmDeleteNoteDialog").modal('hide');
+        },
+        doConfirmDelete: function() {
+            var selectedNote = this.get('noteForDeletion');
+            this.set('noteForDeletion', null);
+            if (selectedNote) {
+                this.store.deleteRecord(selectedNote);
+                selectedNote.save();
+                if (this.get('controllers.notesNote.model.id') === selectedNote.get('id')) {
+                    this.transitionToRoute('notes');
+                }
+            }
+            $("#confirmDeleteNoteDialog").modal('hide');
         }
     }
-})
+});
 
 // Define NotesNoteController
 Notes.NotesNoteController = Ember.ObjectController.extend({
