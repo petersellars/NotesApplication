@@ -15,7 +15,7 @@
     <script src="js/scripts/jquery-1.11.1.js"
             type="text/javascript" charset="utf-8">
     </script>
-    <script src="js/scripts/bootstrap-modal.js"
+    <script src="js/scripts/bootstrap.js"
             type="text/javascript" charset="utf-8">
     </script>
     <script src="js/scripts/handlebars-v1.3.0.js"
@@ -55,6 +55,8 @@
         </div>
 
         {{outlet}}
+
+        {{partial "confirmDialog"}}
     </script>
 
     <script type="text/x-handlebars" id="notes/note">
@@ -63,6 +65,32 @@
             {{textarea valueBinding="value"}}
             <button class="btn btn-primary form-control mediumTopPadding"
                     {{action "updateNote"}}>Update</button><br/>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="_confirmDialog">
+        <div id="confirmDeleteNoteDialog" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header centerAlign">
+                        <h1 class="centerAlign">Delete selected note?</h1>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete the selected Note?
+                        This action cannot be undone!
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default"
+                                {{action "doCancelDelete"}}>
+                                Cancel
+                        </button>
+                        <button class="btn btn-primary"
+                                {{action "doConfirmDelete"}}>
+                                Delete Note
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </script>
 
