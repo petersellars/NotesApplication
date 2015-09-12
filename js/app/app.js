@@ -31,6 +31,7 @@ Notes.NotesNoteRoute = Ember.Route.extend({
 Notes.NotesController = Ember.ArrayController.extend({
     needs: ['notesNote'],
     newNoteName: null, // Binds newNoteName property to text field
+    selectedNoteBinding: 'controllers.notesNote.model',
     actions: {
         createNewNote: function() { // Define createNewNote action
             var content = this.get('content');
